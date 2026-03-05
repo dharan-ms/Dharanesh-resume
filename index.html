@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dharan Resume</title>
+    <style>
+        :root {
+            --accent: #f4b000;
+            /* yellow line / accent */
+            --text: #111;
+            --muted: #666;
+            --light: #f6f6f6;
+            --line: #e9e9e9;
+            --card: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--text);
+            background: #fff;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        .resume {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+        }
+
+        /* LEFT COLUMN */
+        .left {
+            width: 320px;
+            position: relative;
+        }
+
+        .photoWrap {
+            position: relative;
+            width: 230px;
+            height: 260px;
+            margin: 4px 0 14px 10px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #ddd;
+        }
+
+        /* yellow corner shape behind image */
+        .photoWrap::before {
+            content: "";
+            position: absolute;
+            left: -34px;
+            top: -34px;
+            width: 120px;
+            height: 120px;
+            background: var(--accent);
+            border-radius: 18px;
+            z-index: 0;
+            transform: rotate(0deg);
+        }
+
+        .photo {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: #8a0f18;
+            /* fallback */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .name {
+            margin: 10px 0 2px 0;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: .4px;
+        }
+
+        .role {
+            margin: 0 0 18px 0;
+            color: var(--accent);
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .sectionTitleLeft {
+            margin: 18px 0 10px;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: .6px;
+            text-transform: uppercase;
+        }
+
+        .leftLine {
+            height: 3px;
+            width: 160px;
+            background: var(--accent);
+            margin-bottom: 12px;
+            border-radius: 99px;
+        }
+
+        .contactList {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: var(--muted);
+        }
+
+        .contactItem {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            line-height: 1.3;
+            font-size: 15px;
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 18px;
+            margin-top: 1px;
+            color: var(--accent);
+        }
+
+        .skillsBlock {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .skillHeading {
+            font-weight: 800;
+            color: #222;
+            margin: 14px 0 6px;
+        }
+
+        .skillLabel {
+            font-weight: 700;
+            color: #222;
+            margin: 10px 0 4px;
+        }
+
+        .skillMeta {
+            margin: 0 0 6px 0;
+        }
+
+        .langRow {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .langRow:last-child {
+            border-bottom: none;
+        }
+
+        .langName {
+            font-weight: 700;
+            color: #222;
+        }
+
+        .langLevel {
+            color: var(--muted);
+        }
+
+        /* RIGHT COLUMN */
+        .right {
+            flex: 1;
+            min-width: 0;
+            padding-top: 6px;
+        }
+
+        .section {
+            margin-bottom: 22px;
+        }
+
+        .sectionHeader {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .sectionHeader h2 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: .6px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .sectionHeader .bar {
+            height: 3px;
+            width: 100%;
+            background: var(--accent);
+            border-radius: 99px;
+        }
+
+        .bullets {
+            margin: 10px 0 0 18px;
+            color: var(--muted);
+            line-height: 1.55;
+            font-size: 15px;
+        }
+
+        .bullets b {
+            color: #222;
+        }
+
+        .eduItem {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: 10px 16px;
+            padding: 10px 0;
+            border-radius: 10px;
+        }
+
+        .eduItem.highlight {
+            border: 2px solid #43d7c7;
+            /* teal border like screenshot */
+            padding: 12px;
+            margin-top: 10px;
+        }
+
+        .eduDate {
+            color: var(--muted);
+            font-weight: 700;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .eduMain {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .eduDegree {
+            font-weight: 900;
+            color: #222;
+        }
+
+        .eduSchool {
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .eduMeta {
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .workRow {
+            margin-top: 6px;
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        .workTitle {
+            color: #222;
+            font-weight: 900;
+        }
+
+        .workBullets {
+            margin: 10px 0 0 18px;
+            color: var(--muted);
+            line-height: 1.55;
+            font-size: 15px;
+        }
+
+        .workBullets b {
+            color: #222;
+        }
+
+        .projectsTitle {
+            margin: 10px 0 10px 0;
+            color: #222;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .projectGroupHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            color: var(--muted);
+            font-weight: 800;
+            margin-top: 6px;
+        }
+
+        .projectGroupHeader .leftText {
+            color: #222;
+            font-weight: 900;
+        }
+
+        .projectGroupHeader .rightDate {
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .projectName {
+            margin: 8px 0 4px;
+            font-weight: 900;
+            color: #222;
+        }
+
+        .projectBullets {
+            margin: 0 0 0 18px;
+            color: var(--muted);
+            line-height: 1.55;
+            font-size: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 920px) {
+            .resume {
+                flex-direction: column;
+            }
+
+            .left {
+                width: 100%;
+            }
+
+            .photoWrap {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="resume">
+
+            <!-- LEFT -->
+            <aside class="left">
+                <div class="photoWrap">
+                    <!-- Replace src with your image path -->
+                    <div class="photo">
+                        <img src="profile.png" alt="Profile Photo">
+                    </div>
+                </div>
+
+                <div class="name">DHARAN</div>
+                <div class="role">Frontend Developer</div>
+
+                <div class="sectionTitleLeft">CONTACTS</div>
+                <div class="leftLine"></div>
+
+                <ul class="contactList">
+                    <li class="contactItem">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z" />
+                        </svg>
+                        <span>9629183348</span>
+                    </li>
+
+                    <li class="contactItem">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        <span>dharanesh.rajms@gmail.com</span>
+                    </li>
+
+                    <li class="contactItem">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z" />
+                        </svg>
+                        <span>chennai , india</span>
+                    </li>
+
+                    <li class="contactItem">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M22 5.8a8.7 8.7 0 01-2.5.7A4.3 4.3 0 0021.4 4a8.6 8.6 0 01-2.7 1A4.3 4.3 0 0011.3 9a12.2 12.2 0 01-8.9-4.5 4.3 4.3 0 001.3 5.7 4.2 4.2 0 01-2-.6v.1a4.3 4.3 0 003.4 4.2 4.4 4.4 0 01-2 .1 4.3 4.3 0 004 3 8.7 8.7 0 01-5.4 1.9A9 9 0 012 19.7 12.2 12.2 0 008.6 22c7.7 0 11.9-6.4 11.9-11.9v-.5A8.5 8.5 0 0022 5.8z" />
+                        </svg>
+                        <span>twitter(x) : shan_dharan</span>
+                    </li>
+                </ul>
+
+                <div class="sectionTitleLeft">SKILLS</div>
+                <div class="leftLine"></div>
+
+                <div class="skillsBlock">
+                    <div class="skillHeading">Frontend Development</div>
+                    <div class="skillMeta">Frontend Development</div>
+                    <div class="skillLabel">Skill Title: <span style="font-weight:600;color:var(--muted)">Frontend
+                            Development</span></div>
+                    <div class="skillLabel">Skill Items:</div>
+                    <div class="skillMeta">HTML, CSS, JavaScript, React.</div>
+
+                    <div class="skillHeading">Backend Development</div>
+                    <div class="skillMeta">Backend Development</div>
+                    <div class="skillLabel">Skill Title: <span style="font-weight:600;color:var(--muted)">Backend
+                            Development</span></div>
+                    <div class="skillLabel">Skill Items:</div>
+                    <div class="skillMeta">Node.js, Express.js, REST APIs</div>
+
+                    <div class="skillHeading">Tools &amp; Platforms</div>
+                    <div class="skillMeta">Tools &amp; Platforms</div>
+                    <div class="skillMeta">Git, GitHub, VS Code, Netlify,</div>
+                    <div class="skillMeta">Vercel</div>
+                </div>
+
+                <div class="sectionTitleLeft" style="margin-top:22px;">Languages</div>
+                <div class="leftLine"></div>
+
+                <div class="langRow">
+                    <div class="langName">English</div>
+                    <div class="langLevel">Fluent</div>
+                </div>
+                <div class="langRow">
+                    <div class="langName">Tamil</div>
+                    <div class="langLevel">Native</div>
+                </div>
+                <div class="langRow">
+                    <div class="langName">Telugu , hindi</div>
+                    <div class="langLevel">Proficient</div>
+                </div>
+            </aside>
+
+            <!-- RIGHT -->
+            <main class="right">
+
+                <!-- PROFILE -->
+                <section class="section">
+                    <div class="sectionHeader">
+                        <h2>PROFILE</h2>
+                        <div class="bar"></div>
+                    </div>
+
+                    <ul class="bullets">
+                        <li>First-year college student learning <b>Full Stack Development</b>.</li>
+                        <li>Passionate about building <b>modern and responsive</b> web applications.</li>
+                        <li>Actively improving <b>coding</b> and <b>problem-solving</b> skills through projects.</li>
+                    </ul>
+                </section>
+
+                <!-- EDUCATION -->
+                <section class="section">
+                    <div class="sectionHeader">
+                        <h2>EDUCATION</h2>
+                        <div class="bar"></div>
+                    </div>
+
+                    <div class="eduItem">
+                        <div class="eduDate">Jul, 2025 - Present</div>
+                        <div class="eduMain">
+                            <div class="eduDegree">B.Tech in Computer Science</div>
+                            <div class="eduSchool">BITS Pilani &nbsp; • &nbsp; India</div>
+                            <div class="eduMeta">Grade: Pursuing / N/A</div>
+                        </div>
+                    </div>
+
+                    <div class="eduItem highlight">
+                        <div class="eduDate">Jun, 2024 - Mar, 2025</div>
+                        <div class="eduMain">
+                            <div class="eduDegree">Higher Secondary (12th)</div>
+                            <div class="eduSchool">Adharsh Vidhyalaya Matric Hr Sec School, &nbsp; • &nbsp; India</div>
+                            <div class="eduMeta">Grade: 82%</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- WORK EXPERIENCE -->
+                <section class="section">
+                    <div class="sectionHeader">
+                        <h2>WORK EXPERIENCE</h2>
+                        <div class="bar"></div>
+                    </div>
+
+                    <div class="workRow">
+                        <span class="workTitle">Frontend Developer</span>
+                        &nbsp; • &nbsp; Personal Projects &nbsp; Remote
+                    </div>
+                    <div style="color:var(--muted); font-weight:700; margin-top:6px;">Dec, 2025 - Present</div>
+
+                    <ul class="workBullets">
+                        <li>Built responsive web pages using <b>HTML, CSS, JavaScript, and React</b>.</li>
+                        <li>Developed reusable UI components and improved website performance.</li>
+                        <li>Worked with <b>Git</b> and <b>GitHub</b> for version control and project management.</li>
+                    </ul>
+                </section>
+
+                <!-- PROJECTS -->
+                <section class="section">
+                    <div class="sectionHeader">
+                        <div class="projectsTitle">Projects</div>
+                        <div class="bar"></div>
+                    </div>
+
+                    <div class="projectGroupHeader">
+                        <div class="leftText">Frontend Project</div>
+                        <div class="rightDate">Dec, 2025 - Present</div>
+                    </div>
+
+                    <div class="projectName">Typing Speed Test Clone</div>
+                    <ul class="projectBullets">
+                        <li>Built a typing speed test app that calculates <b>WPM</b> and <b>accuracy</b> using
+                            <b>JavaScript</b>.
+                        </li>
+                    </ul>
+
+                    <div class="projectName" style="margin-top:10px;">Excalidraw Clone</div>
+                    <ul class="projectBullets">
+                        <li>Developed a <b>drawing application</b> using <b>React</b> and <b>Canvas API</b> for creating
+                            sketches and shapes.</li>
+                    </ul>
+
+                    <div class="projectName" style="margin-top:10px;">Weather App</div>
+                    <ul class="projectBullets">
+                        <li>Created a weather app that <b>fetches real-time weather data</b> using a weather API.</li>
+                    </ul>
+
+                    <div class="projectName" style="margin-top:10px;">Todo App</div>
+                    <ul class="projectBullets">
+                        <li>Built a simple <b>task manager</b> to add and delete tasks using <b>JavaScript/React</b>.
+                        </li>
+                    </ul>
+                </section>
+
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
